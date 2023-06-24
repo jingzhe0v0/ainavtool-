@@ -19,12 +19,12 @@ page_list=[baseurl+str(i) for i in range(1,20)]
 for page in page_list :
     html=requests.get(url=page).text
     tree=etree.HTML(html)
-    url_list=tree.xpath('//div[@class="cat_list"]//div[@class="list-body"]/h2/a/@href')
+    url_list=tree.xpath('//div[@class="cat_list"]//div[@class="list-body"]/h2/a/@href')  #获取每页中的文章链接
     for url in url_list:
         art_html=requests.get(url=url).text
         art_tree=etree.HTML(art_html)
-        title=art_tree.xpath('//div[@class="panel card"]/div/div/h1/text()')
-        passage_list=art_tree.xpath('//div[@class="panel-body single mt-2"]/p/text()')
+        title=art_tree.xpath('//div[@class="panel card"]/div/div/h1/text()')              #获得文章标题
+        passage_list=art_tree.xpath('//div[@class="panel-body single mt-2"]/p/text()')        #获得文章内容
         text=''
         for passage in passage_list :
             text=text+passage
